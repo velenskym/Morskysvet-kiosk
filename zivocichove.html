@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920">
+  <title>Živočichové — Raja Ampat · Mořský svět Praha</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #00A0E3;
+      --navy: #004469;
+      --deeper: #00325a;
+      --orange: #EF7F1A;
+      --bg: #001a2e;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: #fff;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      user-select: none;
+      cursor: none;
+    }
+
+    /* ── HEADER ── */
+    header {
+      height: 110px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 60px;
+      border-bottom: 2px solid rgba(0,160,227,0.25);
+      position: relative; z-index: 10;
+    }
+    .header-left { display:flex; align-items:center; gap:32px; }
+    .logo img { height:72px; width:auto; }
+    .back-btn {
+      display:flex; align-items:center; gap:10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 10px 22px;
+      font-size:15px; font-weight:500;
+      color: rgba(255,255,255,0.75);
+      cursor:pointer; transition:all 0.2s;
+      font-family:'DM Sans',sans-serif;
+    }
+    .back-btn:hover { background:rgba(255,255,255,0.14); color:#fff; }
+    .lang-switch {
+      display:flex; gap:4px;
+      background:rgba(255,255,255,0.07);
+      border-radius:10px; padding:5px;
+    }
+    .lang-btn {
+      padding:10px 28px; border-radius:7px;
+      font-size:16px; font-weight:600; letter-spacing:0.06em;
+      cursor:pointer; border:none; transition:all 0.2s;
+      font-family:'DM Sans',sans-serif;
+    }
+    .lang-btn.active { background:var(--blue); color:white; }
+    .lang-btn:not(.active) { background:transparent; color:rgba(255,255,255,0.4); }
+
+    /* ── MAIN ── */
+    .main {
+      display:flex;
+      height: calc(1080px - 110px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 420px;
+      min-width: 420px;
+      background: #001224;
+      border-right: 1px solid rgba(0,160,227,0.12);
+      display:flex; flex-direction:column;
+      overflow-y:auto;
+      scrollbar-width:none;
+    }
+    .sidebar::-webkit-scrollbar { display:none; }
+    .sidebar-header {
+      padding: 28px 28px 18px;
+      font-size:12px; font-weight:700;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:rgba(255,255,255,0.3);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .animal-item {
+      display:flex; align-items:center; gap:18px;
+      padding: 18px 28px;
+      cursor:pointer;
+      border-left: 4px solid transparent;
+      transition:all 0.2s;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .animal-item:hover { background:rgba(0,160,227,0.06); }
+    .animal-item.active {
+      background:rgba(0,160,227,0.1);
+      border-left-color:var(--blue);
+    }
+    .animal-thumb {
+      width:80px; height:60px;
+      border-radius:10px; overflow:hidden;
+      flex-shrink:0; background:var(--deeper);
+    }
+    .animal-thumb img { width:100%; height:100%; object-fit:cover; }
+    .animal-names { flex:1; min-width:0; }
+    .animal-cs {
+      font-size:17px; font-weight:600; color:white;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .animal-la {
+      font-size:13px; font-weight:300;
+      color:rgba(255,255,255,0.38); font-style:italic;
+      margin-top:3px;
+    }
+    .animal-active-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--blue); flex-shrink:0;
+      opacity:0; transition:opacity 0.2s;
+    }
+    .animal-item.active .animal-active-dot { opacity:1; }
+
+    /* ── DETAIL ── */
+    .detail {
+      flex:1;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .detail-photo {
+      position:relative; background:var(--bg); overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .detail-photo img {
+      width:90%; height:90%;
+      object-fit:contain; object-position:center;
+      display:block;
+      filter: drop-shadow(0 8px 40px rgba(0,160,227,0.15));
+    }
+    .detail-photo::after {
+      content:'';
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to right, transparent 70%, var(--bg) 100%),
+        linear-gradient(to bottom, transparent 90%, var(--bg) 100%);
+      pointer-events:none;
+    }
+
+    /* ── NAV ARROWS ── */
+    .nav-prev, .nav-next {
+      position:absolute;
+      bottom:28px;
+      z-index:10;
+      display:flex; align-items:center; justify-content:center;
+      width:80px; height:80px;
+      border-radius:50%;
+      background:rgba(0,30,60,0.9);
+      backdrop-filter:blur(12px);
+      border:2px solid rgba(0,160,227,0.4);
+      cursor:pointer;
+      transition:all 0.2s;
+      font-size:36px; font-weight:700; color:white;
+    }
+    .nav-prev { left: calc(50% - 108px); }
+    .nav-next { left: calc(50% + 28px); }
+    .nav-prev:hover, .nav-next:hover {
+      background:rgba(0,160,227,0.4);
+      border-color:var(--blue);
+      transform:scale(1.08);
+    }
+    .nav-prev:active, .nav-next:active {
+      transform:scale(0.94);
+    }
+
+    /* counter badge */
+    .nav-counter {
+      position:absolute; bottom:46px; left:50%;
+      transform:translateX(-50%);
+      z-index:5;
+      background:rgba(0,0,0,0.5);
+      backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      padding:6px 18px;
+      font-size:13px; font-weight:500;
+      color:rgba(255,255,255,0.6);
+      letter-spacing:0.08em;
+    }
+
+    .detail-info {
+      padding: 48px 56px;
+      display:flex; flex-direction:column; gap:20px;
+      overflow-y:auto; scrollbar-width:none;
+    }
+    .detail-info::-webkit-scrollbar { display:none; }
+
+    .detail-tag {
+      font-size:11px; font-weight:700;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--orange);
+    }
+    .detail-name-cs {
+      font-size:48px; font-weight:700; line-height:1.0;
+      background:linear-gradient(135deg,#fff 0%,#a8d8f0 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .detail-name-la {
+      font-size:18px; font-weight:300; font-style:italic;
+      color:rgba(255,255,255,0.45); margin-top:-10px;
+    }
+    .detail-name-en {
+      font-size:15px; font-weight:500;
+      color:rgba(255,255,255,0.35); margin-top:-8px;
+    }
+    .divider { height:1px; background:rgba(0,160,227,0.2); }
+    .detail-desc {
+      font-size:16px; font-weight:300;
+      line-height:1.8; color:rgba(255,255,255,0.7);
+    }
+    .map-label {
+      font-size:11px; font-weight:700;
+      letter-spacing:0.15em; text-transform:uppercase;
+      color:rgba(255,255,255,0.3);
+    }
+    .detail-map {
+      max-width:360px; border-radius:12px; overflow:hidden;
+      border:1px solid rgba(0,160,227,0.15);
+    }
+    .detail-map img { width:100%; display:block; }
+
+    /* anim */
+    .detail-info { animation:fadeIn 0.3s ease; }
+    @keyframes fadeIn { from {opacity:0;transform:translateX(10px)} to {opacity:1;transform:translateX(0)} }
+
+    .ripple {
+      position:fixed; width:60px; height:60px;
+      margin-left:-30px; margin-top:-30px;
+      border-radius:50%; background:rgba(0,160,227,0.2);
+      pointer-events:none;
+      animation:rippleOut 0.5s ease-out forwards; z-index:9999;
+    }
+    @keyframes rippleOut { to {transform:scale(3);opacity:0;} }
+  </style>
+  <style>
+    html {
+      transform-origin: top left;
+      transform: scale(0.7115);
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      position: fixed;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo"><img src="images/zivoc_001.png" alt="Mořský svět"></div>
+    <button class="back-btn" onclick="goHome()">← Zpět</button>
+  </div>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('cs')">CS</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-header" data-cs="Živočichové nádrže" data-en="Tank Animals">Živočichové nádrže</div>
+
+    <div class="animal-item active" onclick="selectAnimal(0)">
+      <div class="animal-thumb"><img src="images/zivoc_002.png" alt="Bradáč ohnivý"></div>
+      <div class="animal-names">
+        <div class="animal-cs" data-cs="Bradáč ohnivý" data-en="Flame anthias">Bradáč ohnivý</div>
+        <div class="animal-la">Pseudanthias ignitus</div>
+      </div>
+      <div class="animal-active-dot"></div>
+    </div>
+
+    <div class="animal-item" onclick="selectAnimal(1)">
+      <div class="animal-thumb"><img src="images/zivoc_003.jpg" alt="Živočich 2"></div>
+      <div class="animal-names">
+        <div class="animal-cs" data-cs="Živočich 2" data-en="Animal 2">Živočich 2</div>
+        <div class="animal-la">Lorem ipsum</div>
+      </div>
+      <div class="animal-active-dot"></div>
+    </div>
+
+    <div class="animal-item" onclick="selectAnimal(2)">
+      <div class="animal-thumb"><img src="images/zivoc_003.jpg" alt="Živočich 3"></div>
+      <div class="animal-names">
+        <div class="animal-cs" data-cs="Živočich 3" data-en="Animal 3">Živočich 3</div>
+        <div class="animal-la">Lorem ipsum</div>
+      </div>
+      <div class="animal-active-dot"></div>
+    </div>
+
+    <div class="animal-item" onclick="selectAnimal(3)">
+      <div class="animal-thumb"><img src="images/zivoc_003.jpg" alt="Živočich 4"></div>
+      <div class="animal-names">
+        <div class="animal-cs" data-cs="Živočich 4" data-en="Animal 4">Živočich 4</div>
+        <div class="animal-la">Lorem ipsum</div>
+      </div>
+      <div class="animal-active-dot"></div>
+    </div>
+
+    <div class="animal-item" onclick="selectAnimal(4)">
+      <div class="animal-thumb"><img src="images/zivoc_003.jpg" alt="Živočich 5"></div>
+      <div class="animal-names">
+        <div class="animal-cs" data-cs="Živočich 5" data-en="Animal 5">Živočich 5</div>
+        <div class="animal-la">Lorem ipsum</div>
+      </div>
+      <div class="animal-active-dot"></div>
+    </div>
+  </nav>
+
+  <!-- DETAIL -->
+  <div class="detail">
+
+    <div class="detail-photo" id="detailPhoto">
+      <img src="images/zivoc_002.png" alt="Bradáč ohnivý" id="detailImg">
+
+      <!-- PROMINENT NAV ARROWS -->
+      <div class="nav-prev" onclick="prevAnimal()">←</div>
+      <div class="nav-next" onclick="nextAnimal()">→</div>
+      <div class="nav-counter" id="navCounter">1 / 5</div>
+    </div>
+
+    <div class="detail-info" id="detailInfo">
+      <div class="detail-tag" id="detailTag">Indopacifická oblast</div>
+      <div class="detail-name-cs" id="detailNameCs">Bradáč ohnivý</div>
+      <div class="detail-name-la" id="detailNameLa">Pseudanthias ignitus</div>
+      <div class="detail-name-en" id="detailNameEn">Flame anthias</div>
+      <div class="divider"></div>
+      <div class="detail-desc" id="detailDesc">
+        Bradáč ohnivý obývá vnější hranu korálových útesů v hloubce od 3 do 15 metrů. Vytváří veliká hejna v harémovém uspořádání — několik samic na jednoho samce. Je to sekvenční hermafrodit: z nejsilnější, dominantní samice se stane samec.
+      </div>
+      <div class="map-label" data-cs="Rozšíření" data-en="Distribution">Rozšíření</div>
+      <div class="detail-map">
+        <img src="images/zivoc_008.jpg" alt="Mapa rozšíření" id="detailMap">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let currentLang = 'cs';
+  let currentIndex = 0;
+  const total = 5;
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+    document.querySelectorAll('[data-cs]').forEach(el => {
+      el.textContent = el.dataset[lang] || el.dataset.cs;
+    });
+  }
+
+  function selectAnimal(idx) {
+    currentIndex = idx;
+    document.querySelectorAll('.animal-item').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.animal-item')[idx].scrollIntoView({behavior:'smooth', block:'nearest'});
+    document.getElementById('navCounter').textContent = (idx + 1) + ' / ' + total;
+    const info = document.getElementById('detailInfo');
+    info.style.animation = 'none';
+    info.offsetHeight;
+    info.style.animation = 'fadeIn 0.3s ease';
+  }
+
+  function prevAnimal() {
+    if (currentIndex > 0) selectAnimal(currentIndex - 1);
+  }
+
+  function nextAnimal() {
+    if (currentIndex < total - 1) selectAnimal(currentIndex + 1);
+  }
+
+  function goHome() { console.log('home'); }
+
+  document.addEventListener('click', function(e) {
+    const r = document.createElement('div');
+    r.className = 'ripple';
+    r.style.left = e.clientX + 'px';
+    r.style.top = e.clientY + 'px';
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+  });
+</script>
+  <script>
+  (function() {
+    var TIMEOUT = 60 * 1000;
+    var HOME = "index.html";
+    var timer;
+    function reset() {
+      clearTimeout(timer);
+      timer = setTimeout(function() { window.location.href = HOME; }, TIMEOUT);
+    }
+    ["mousemove","mousedown","touchstart","touchmove","keydown","scroll","click"].forEach(function(e) {
+      document.addEventListener(e, reset, { passive: true });
+    });
+    reset();
+  })();
+  </script>
+</body>
+</html>
