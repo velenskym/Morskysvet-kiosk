@@ -389,8 +389,14 @@
         el.textContent = el.dataset[lang] || el.dataset.cs;
       });
     }
-    function navigate(page) {
-      console.log('Navigate:', page);
+        function navigate(page) {
+      var pages = {
+        'raja-ampat': 'raja-ampat.html',
+        'utes': 'utes.html',
+        'zivocichove': 'zivocichove.html',
+        'admin': 'admin.html'
+      };
+      if (pages[page]) window.location.href = pages[page];
     }
     document.addEventListener('click', function(e) {
       const r = document.createElement('div');
