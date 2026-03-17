@@ -465,7 +465,7 @@
         <!-- Card: Raja Ampat -->
         <div class="article-card" id="card-raja" onclick="selectArticle('raja')">
           <div class="article-card-thumb">
-            <img src="images/raja_ampat.webp" alt="Raja Ampat" onerror="this.style.display='none'">
+            <img src="images/raja%20ampat.jpg" alt="Raja Ampat" onerror="this.style.display='none'">
             <div class="thumb-overlay"></div>
           </div>
           <div class="article-card-body">
@@ -714,10 +714,10 @@
 
   let animals = [
     { id:1, cs:'Bradáč ohnivý', en:'Flame anthias', la:'Pseudanthias ignitus', descCs:'Bradáč ohnivý obývá vnější hranu korálových útesů v hloubce od 3 do 15 metrů. Vytváří veliká hejna v harémovém uspořádání.', descEn:'The flame anthias inhabits the outer edge of coral reefs at depths of 3 to 15 metres. It forms large schools in harem arrangements.', img:'images/zivoc_002.png' },
-    { id:2, cs:'Živočich 2', en:'Animal 2', la:'Lorem ipsum', descCs:'Popis živočicha 2.', descEn:'Description of animal 2.', img:'images/zivoc_003.jpg' },
-    { id:3, cs:'Živočich 3', en:'Animal 3', la:'Lorem ipsum', descCs:'Popis živočicha 3.', descEn:'Description of animal 3.', img:'images/zivoc_003.jpg' },
-    { id:4, cs:'Živočich 4', en:'Animal 4', la:'Lorem ipsum', descCs:'Popis živočicha 4.', descEn:'Description of animal 4.', img:'images/zivoc_003.jpg' },
-    { id:5, cs:'Živočich 5', en:'Animal 5', la:'Lorem ipsum', descCs:'Popis živočicha 5.', descEn:'Description of animal 5.', img:'images/zivoc_003.jpg' },
+    { id:2, cs:'Živočich 2', en:'Animal 2', la:'Lorem ipsum', descCs:'Popis živočicha 2.', descEn:'Description of animal 2.', img:'images/zivoc_003.png' },
+    { id:3, cs:'Živočich 3', en:'Animal 3', la:'Lorem ipsum', descCs:'Popis živočicha 3.', descEn:'Description of animal 3.', img:'images/zivoc_003.png' },
+    { id:4, cs:'Živočich 4', en:'Animal 4', la:'Lorem ipsum', descCs:'Popis živočicha 4.', descEn:'Description of animal 4.', img:'images/zivoc_003.png' },
+    { id:5, cs:'Živočich 5', en:'Animal 5', la:'Lorem ipsum', descCs:'Popis živočicha 5.', descEn:'Description of animal 5.', img:'images/zivoc_003.png' },
   ];
 
   // ── STATE ──
@@ -833,7 +833,7 @@
       const idx = animals.findIndex(a => a.id === editingAnimalId);
       animals[idx] = { ...animals[idx], ...data };
     } else {
-      animals.push({ id: Date.now(), img: 'images/zivoc_003.jpg', ...data });
+      animals.push({ id: Date.now(), img: 'images/zivoc_003.png', ...data });
     }
     closeAnimalModal();
     renderAnimals();
