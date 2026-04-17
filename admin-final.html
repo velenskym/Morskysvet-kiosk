@@ -749,8 +749,7 @@
     try {
       const data = await ghFetch('zivocichove.html');
       fileSha = data.sha;
-      const html = decodeURIComponent(escape(atob(data.content.replace(/
-/g,''))));
+      const html = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
       const start = html.indexOf('const ANIMALS = [');
       if (start === -1) throw new Error('ANIMALS blok nenalezen — použij novou verzi zivocichove.html');
       const arrStart = html.indexOf('[', start);
