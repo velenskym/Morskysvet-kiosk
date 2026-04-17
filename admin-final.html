@@ -715,6 +715,8 @@
       branch: document.getElementById('gh-branch').value.trim() || 'main',
       token: document.getElementById('gh-token').value.trim(),
     };
+    // Uložit do localStorage
+    localStorage.setItem('ghConfig', JSON.stringify(ghConfig));
     closeGithubModal();
     await loadFromGitHub();
   }
@@ -1037,12 +1039,21 @@
     if (e.target === this) closeGithubModal();
   });
 
-  // Při startu jen nastavit status, neotvírat modal automaticky
   window.addEventListener('load', () => {
-    setGhStatus('Nepřipojen', '#666');
-    // Zobrazit upozornění v topbaru
-    document.getElementById('ghStatus').innerHTML =
-      '<span style="width:7px;height:7px;border-radius:50%;background:#666;display:inline-block"></span> Nepřipojen — klikni 🔑 v menu';
+    // Načíst uložený config z localStorage
+    const saved = localStorage.getItem('ghConfig');
+    if (saved) {
+      try {
+        const c = JSON.parse(saved);
+        ghConfig = { ...ghConfig, ...c };
+        document.getElementById('gh-repo').value = ghConfig.repo;
+        document.getElementById('gh-branch').value = ghConfig.branch;
+        document.getElementById('gh-token').value = ghConfig.token;
+        setGhStatus('Token načten — klikni Načíst z GitHubu', '#f0a500');
+      } catch(e) {}
+    } else {
+      setGhStatus('Nepřipojen — klikni 🔑 v menu', '#666');
+    }
   });
 </script>
 </body>
