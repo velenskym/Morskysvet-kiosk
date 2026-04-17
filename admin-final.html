@@ -1038,10 +1038,12 @@
     if (e.target === this) closeGithubModal();
   });
 
-  // Auto-otevřít GitHub modal při startu
+  // Při startu jen nastavit status, neotvírat modal automaticky
   window.addEventListener('load', () => {
     setGhStatus('Nepřipojen', '#666');
-    openGithubModal();
+    // Zobrazit upozornění v topbaru
+    document.getElementById('ghStatus').innerHTML =
+      '<span style="width:7px;height:7px;border-radius:50%;background:#666;display:inline-block"></span> Nepřipojen — klikni 🔑 v menu';
   });
 </script>
 </body>
