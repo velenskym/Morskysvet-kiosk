@@ -43,7 +43,7 @@
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 10px; padding: 10px 22px;
-      font-size: 21px; font-weight:500;
+      font-size:15px; font-weight:500;
       color: rgba(255,255,255,0.75);
       cursor:pointer; transition:all 0.2s;
       font-family:'DM Sans',sans-serif;
@@ -56,7 +56,7 @@
     }
     .lang-btn {
       padding:10px 28px; border-radius:7px;
-      font-size: 21px; font-weight:600; letter-spacing:0.06em;
+      font-size:16px; font-weight:600; letter-spacing:0.06em;
       cursor:pointer; border:none; transition:all 0.2s;
       font-family:'DM Sans',sans-serif;
     }
@@ -82,7 +82,7 @@
     .sidebar::-webkit-scrollbar { display:none; }
     .sidebar-header {
       padding: 28px 28px 18px;
-      font-size: 17px; font-weight:700;
+      font-size:12px; font-weight:700;
       letter-spacing:0.18em; text-transform:uppercase;
       color:rgba(255,255,255,0.3);
       border-bottom:1px solid rgba(255,255,255,0.06);
@@ -108,11 +108,11 @@
     .animal-thumb img { width:100%; height:100%; object-fit:cover; }
     .animal-names { flex:1; min-width:0; }
     .animal-cs {
-      font-size: 22px; font-weight:600; color:white;
+      font-size:17px; font-weight:600; color:white;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     .animal-la {
-      font-size: 18px; font-weight:300;
+      font-size:13px; font-weight:300;
       color:rgba(255,255,255,0.38); font-style:italic;
       margin-top:3px;
     }
@@ -154,32 +154,32 @@
     /* ── NAV ARROWS ── */
     .nav-prev, .nav-next {
       position:absolute;
-      bottom:28px;
+      top:50%; transform:translateY(-50%);
       z-index:10;
       display:flex; align-items:center; justify-content:center;
-      width:80px; height:80px;
+      width:96px; height:96px;
       border-radius:50%;
       background:rgba(0,30,60,0.9);
       backdrop-filter:blur(12px);
       border:2px solid rgba(0,160,227,0.4);
       cursor:pointer;
       transition:all 0.2s;
-      font-size: 42px; font-weight:700; color:white;
+      font-size:40px; font-weight:700; color:white;
     }
-    .nav-prev { left: calc(50% - 108px); }
-    .nav-next { left: calc(50% + 28px); }
+    .nav-prev { left:28px; }
+    .nav-next { right:28px; }
     .nav-prev:hover, .nav-next:hover {
       background:rgba(0,160,227,0.4);
       border-color:var(--blue);
-      transform:scale(1.08);
+      transform:translateY(-50%) scale(1.08);
     }
     .nav-prev:active, .nav-next:active {
-      transform:scale(0.94);
+      transform:translateY(-50%) scale(0.94);
     }
 
     /* counter badge */
     .nav-counter {
-      position:absolute; bottom:46px; left:50%;
+      position:absolute; bottom:24px; left:50%;
       transform:translateX(-50%);
       z-index:5;
       background:rgba(0,0,0,0.5);
@@ -187,7 +187,7 @@
       border:1px solid rgba(255,255,255,0.12);
       border-radius:20px;
       padding:6px 18px;
-      font-size: 18px; font-weight:500;
+      font-size:13px; font-weight:500;
       color:rgba(255,255,255,0.6);
       letter-spacing:0.08em;
     }
@@ -200,31 +200,31 @@
     .detail-info::-webkit-scrollbar { display:none; }
 
     .detail-tag {
-      font-size: 16px; font-weight:700;
+      font-size:11px; font-weight:700;
       letter-spacing:0.18em; text-transform:uppercase;
       color:var(--orange);
     }
     .detail-name-cs {
-      font-size: 56px; font-weight:700; line-height:1.0;
+      font-size:48px; font-weight:700; line-height:1.0;
       background:linear-gradient(135deg,#fff 0%,#a8d8f0 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       background-clip:text;
     }
     .detail-name-la {
-      font-size: 23px; font-weight:300; font-style:italic;
+      font-size:18px; font-weight:300; font-style:italic;
       color:rgba(255,255,255,0.45); margin-top:-10px;
     }
     .detail-name-en {
-      font-size: 21px; font-weight:500;
+      font-size:15px; font-weight:500;
       color:rgba(255,255,255,0.35); margin-top:-8px;
     }
     .divider { height:1px; background:rgba(0,160,227,0.2); }
     .detail-desc {
-      font-size: 21px; font-weight:300;
+      font-size:16px; font-weight:300;
       line-height:1.8; color:rgba(255,255,255,0.7);
     }
     .map-label {
-      font-size: 16px; font-weight:700;
+      font-size:11px; font-weight:700;
       letter-spacing:0.15em; text-transform:uppercase;
       color:rgba(255,255,255,0.3);
     }
@@ -247,16 +247,6 @@
     }
     @keyframes rippleOut { to {transform:scale(3);opacity:0;} }
   </style>
-  <style>
-    html {
-      transform-origin: top left;
-      transform: scale(0.7115);
-      width: 1920px;
-      height: 1080px;
-      overflow: hidden;
-      position: fixed;
-    }
-  </style>
 </head>
 <body>
 
@@ -276,87 +266,143 @@
   <!-- SIDEBAR -->
   <nav class="sidebar">
     <div class="sidebar-header" data-cs="Živočichové nádrže" data-en="Tank Animals">Živočichové nádrže</div>
-
-    <div class="animal-item active" onclick="selectAnimal(0)">
-      <div class="animal-thumb"><img src="images/zivoc_002.png" alt="Bradáč ohnivý"></div>
-      <div class="animal-names">
-        <div class="animal-cs" data-cs="Bradáč ohnivý" data-en="Flame anthias">Bradáč ohnivý</div>
-        <div class="animal-la">Pseudanthias ignitus</div>
-      </div>
-      <div class="animal-active-dot"></div>
-    </div>
-
-    <div class="animal-item" onclick="selectAnimal(1)">
-      <div class="animal-thumb"><img src="images/zivoc_003.png" alt="Živočich 2"></div>
-      <div class="animal-names">
-        <div class="animal-cs" data-cs="Živočich 2" data-en="Animal 2">Živočich 2</div>
-        <div class="animal-la">Lorem ipsum</div>
-      </div>
-      <div class="animal-active-dot"></div>
-    </div>
-
-    <div class="animal-item" onclick="selectAnimal(2)">
-      <div class="animal-thumb"><img src="images/zivoc_003.png" alt="Živočich 3"></div>
-      <div class="animal-names">
-        <div class="animal-cs" data-cs="Živočich 3" data-en="Animal 3">Živočich 3</div>
-        <div class="animal-la">Lorem ipsum</div>
-      </div>
-      <div class="animal-active-dot"></div>
-    </div>
-
-    <div class="animal-item" onclick="selectAnimal(3)">
-      <div class="animal-thumb"><img src="images/zivoc_003.png" alt="Živočich 4"></div>
-      <div class="animal-names">
-        <div class="animal-cs" data-cs="Živočich 4" data-en="Animal 4">Živočich 4</div>
-        <div class="animal-la">Lorem ipsum</div>
-      </div>
-      <div class="animal-active-dot"></div>
-    </div>
-
-    <div class="animal-item" onclick="selectAnimal(4)">
-      <div class="animal-thumb"><img src="images/zivoc_003.png" alt="Živočich 5"></div>
-      <div class="animal-names">
-        <div class="animal-cs" data-cs="Živočich 5" data-en="Animal 5">Živočich 5</div>
-        <div class="animal-la">Lorem ipsum</div>
-      </div>
-      <div class="animal-active-dot"></div>
-    </div>
+    <div id="animalList"></div>
   </nav>
 
   <!-- DETAIL -->
   <div class="detail">
-
     <div class="detail-photo" id="detailPhoto">
-      <img src="images/zivoc_002.png" alt="Bradáč ohnivý" id="detailImg">
-
-      <!-- PROMINENT NAV ARROWS -->
+      <img src="" alt="" id="detailImg">
       <div class="nav-prev" onclick="prevAnimal()">←</div>
       <div class="nav-next" onclick="nextAnimal()">→</div>
-      <div class="nav-counter" id="navCounter">1 / 5</div>
+      <div class="nav-counter" id="navCounter">1 / 1</div>
     </div>
-
     <div class="detail-info" id="detailInfo">
-      <div class="detail-tag" id="detailTag">Indopacifická oblast</div>
-      <div class="detail-name-cs" id="detailNameCs">Bradáč ohnivý</div>
-      <div class="detail-name-la" id="detailNameLa">Pseudanthias ignitus</div>
-      <div class="detail-name-en" id="detailNameEn">Flame anthias</div>
+      <div class="detail-tag" id="detailTag"></div>
+      <div class="detail-name-cs" id="detailNameCs"></div>
+      <div class="detail-name-la" id="detailNameLa"></div>
+      <div class="detail-name-en" id="detailNameEn"></div>
       <div class="divider"></div>
-      <div class="detail-desc" id="detailDesc">
-        Bradáč ohnivý obývá vnější hranu korálových útesů v hloubce od 3 do 15 metrů. Vytváří veliká hejna v harémovém uspořádání — několik samic na jednoho samce. Je to sekvenční hermafrodit: z nejsilnější, dominantní samice se stane samec.
-      </div>
+      <div class="detail-desc" id="detailDesc"></div>
       <div class="map-label" data-cs="Rozšíření" data-en="Distribution">Rozšíření</div>
       <div class="detail-map">
-        <img src="images/zivoc_008.png" alt="Mapa rozšíření" id="detailMap">
+        <img src="" alt="Mapa rozšíření" id="detailMap">
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
+  // ── DATA ŽIVOČICHŮ ── editováno přes admin panel ──
+  const ANIMALS = [
+    {
+      cs: "Bradáč ohnivý",
+      en: "Flame anthias",
+      la: "Pseudanthias ignitus",
+      tag_cs: "Indopacifická oblast",
+      tag_en: "Indo-Pacific region",
+      desc_cs: "Bradáč ohnivý obývá vnější hranu korálových útesů v hloubce od 3 do 15 metrů. Vytváří veliká hejna v harémovém uspořádání — několik samic na jednoho samce. Je to sekvenční hermafrodit: z nejsilnější, dominantní samice se stane samec.",
+      desc_en: "The flame anthias inhabits the outer edge of coral reefs at depths of 3 to 15 metres. It forms large schools in harem arrangements — several females to one male. It is a sequential hermaphrodite: the strongest, dominant female becomes a male.",
+      img: "images/zivoc_002.png",
+      map: "images/zivoc_008.png"
+    },
+    {
+      cs: "Živočich 2",
+      en: "Animal 2",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 2.",
+      desc_en: "Description of animal 2.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
+    },
+    {
+      cs: "Živočich 3",
+      en: "Animal 3",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 3.",
+      desc_en: "Description of animal 3.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
+    },
+    {
+      cs: "Živočich 4",
+      en: "Animal 4",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 4.",
+      desc_en: "Description of animal 4.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
+    },
+    {
+      cs: "Živočich 5",
+      en: "Animal 5",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 5.",
+      desc_en: "Description of animal 5.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
+    }
+  ];
+
   let currentLang = 'cs';
   let currentIndex = 0;
-  const total = 5;
+
+  function renderSidebar() {
+    const list = document.getElementById('animalList');
+    list.innerHTML = ANIMALS.map((a, i) => `
+      <div class="animal-item ${i===0?'active':''}" onclick="selectAnimal(${i})">
+        <div class="animal-thumb"><img src="${a.img}" alt="${a.cs}"></div>
+        <div class="animal-names">
+          <div class="animal-cs" data-cs="${a.cs}" data-en="${a.en}">${a.cs}</div>
+          <div class="animal-la">${a.la}</div>
+        </div>
+        <div class="animal-active-dot"></div>
+      </div>
+    `).join('');
+  }
+
+  function renderDetail(idx) {
+    const a = ANIMALS[idx];
+    const lang = currentLang;
+    document.getElementById('detailImg').src = a.img;
+    document.getElementById('detailImg').alt = a.cs;
+    document.getElementById('detailTag').textContent = lang === 'en' ? a.tag_en : a.tag_cs;
+    document.getElementById('detailNameCs').textContent = a.cs;
+    document.getElementById('detailNameLa').textContent = a.la;
+    document.getElementById('detailNameEn').textContent = a.en;
+    document.getElementById('detailDesc').textContent = lang === 'en' ? a.desc_en : a.desc_cs;
+    document.getElementById('detailMap').src = a.map;
+    document.getElementById('navCounter').textContent = (idx + 1) + ' / ' + ANIMALS.length;
+  }
+
+  function selectAnimal(idx) {
+    currentIndex = idx;
+    document.querySelectorAll('.animal-item').forEach((el, i) => {
+      el.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.animal-item')[idx].scrollIntoView({behavior:'smooth', block:'nearest'});
+    const info = document.getElementById('detailInfo');
+    info.style.animation = 'none';
+    info.offsetHeight;
+    info.style.animation = 'fadeIn 0.3s ease';
+    renderDetail(idx);
+  }
+
+  function prevAnimal() {
+    if (currentIndex > 0) selectAnimal(currentIndex - 1);
+  }
+
+  function nextAnimal() {
+    if (currentIndex < ANIMALS.length - 1) selectAnimal(currentIndex + 1);
+  }
 
   function setLang(lang) {
     currentLang = lang;
@@ -366,32 +412,10 @@
     document.querySelectorAll('[data-cs]').forEach(el => {
       el.textContent = el.dataset[lang] || el.dataset.cs;
     });
+    renderDetail(currentIndex);
   }
 
-  function selectAnimal(idx) {
-    currentIndex = idx;
-    document.querySelectorAll('.animal-item').forEach((el, i) => {
-      el.classList.toggle('active', i === idx);
-    });
-    document.querySelectorAll('.animal-item')[idx].scrollIntoView({behavior:'smooth', block:'nearest'});
-    document.getElementById('navCounter').textContent = (idx + 1) + ' / ' + total;
-    const info = document.getElementById('detailInfo');
-    info.style.animation = 'none';
-    info.offsetHeight;
-    info.style.animation = 'fadeIn 0.3s ease';
-  }
-
-  function prevAnimal() {
-    if (currentIndex > 0) selectAnimal(currentIndex - 1);
-  }
-
-  function nextAnimal() {
-    if (currentIndex < total - 1) selectAnimal(currentIndex + 1);
-  }
-
-      function goHome() {
-      window.location.href = 'index.html';
-    }
+  function goHome() { window.location.href = 'index.html'; }
 
   document.addEventListener('click', function(e) {
     const r = document.createElement('div');
@@ -401,21 +425,10 @@
     document.body.appendChild(r);
     setTimeout(() => r.remove(), 600);
   });
+
+  // Init
+  renderSidebar();
+  renderDetail(0);
 </script>
-  <script>
-  (function() {
-    var TIMEOUT = 60 * 1000;
-    var HOME = "index.html";
-    var timer;
-    function reset() {
-      clearTimeout(timer);
-      timer = setTimeout(function() { window.location.href = HOME; }, TIMEOUT);
-    }
-    ["mousemove","mousedown","touchstart","touchmove","keydown","scroll","click"].forEach(function(e) {
-      document.addEventListener(e, reset, { passive: true });
-    });
-    reset();
-  })();
-  </script>
 </body>
 </html>
