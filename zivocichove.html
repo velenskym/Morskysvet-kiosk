@@ -419,5 +419,20 @@
   renderSidebar();
   renderDetail(0);
 </script>
+<script>
+(function() {
+  var TIMEOUT = 60 * 1000;
+  var HOME = "index.html";
+  var timer;
+  function reset() {
+    clearTimeout(timer);
+    timer = setTimeout(function() { window.location.href = HOME; }, TIMEOUT);
+  }
+  ["mousemove","mousedown","touchstart","touchmove","keydown","scroll","click"].forEach(function(e) {
+    document.addEventListener(e, reset, { passive: true });
+  });
+  reset();
+})();
+  </script>
 </body>
 </html>
