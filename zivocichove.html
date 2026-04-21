@@ -43,7 +43,7 @@
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 10px; padding: 10px 22px;
-      font-size:15px; font-weight:500;
+      font-size: 21px; font-weight:500;
       color: rgba(255,255,255,0.75);
       cursor:pointer; transition:all 0.2s;
       font-family:'DM Sans',sans-serif;
@@ -56,7 +56,7 @@
     }
     .lang-btn {
       padding:10px 28px; border-radius:7px;
-      font-size:16px; font-weight:600; letter-spacing:0.06em;
+      font-size: 21px; font-weight:600; letter-spacing:0.06em;
       cursor:pointer; border:none; transition:all 0.2s;
       font-family:'DM Sans',sans-serif;
     }
@@ -82,7 +82,7 @@
     .sidebar::-webkit-scrollbar { display:none; }
     .sidebar-header {
       padding: 28px 28px 18px;
-      font-size:12px; font-weight:700;
+      font-size: 17px; font-weight:700;
       letter-spacing:0.18em; text-transform:uppercase;
       color:rgba(255,255,255,0.3);
       border-bottom:1px solid rgba(255,255,255,0.06);
@@ -108,11 +108,11 @@
     .animal-thumb img { width:100%; height:100%; object-fit:cover; }
     .animal-names { flex:1; min-width:0; }
     .animal-cs {
-      font-size:17px; font-weight:600; color:white;
+      font-size: 22px; font-weight:600; color:white;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     .animal-la {
-      font-size:13px; font-weight:300;
+      font-size: 18px; font-weight:300;
       color:rgba(255,255,255,0.38); font-style:italic;
       margin-top:3px;
     }
@@ -154,32 +154,32 @@
     /* ── NAV ARROWS ── */
     .nav-prev, .nav-next {
       position:absolute;
-      top:50%; transform:translateY(-50%);
+      bottom:28px;
       z-index:10;
       display:flex; align-items:center; justify-content:center;
-      width:96px; height:96px;
+      width:80px; height:80px;
       border-radius:50%;
       background:rgba(0,30,60,0.9);
       backdrop-filter:blur(12px);
       border:2px solid rgba(0,160,227,0.4);
       cursor:pointer;
       transition:all 0.2s;
-      font-size:40px; font-weight:700; color:white;
+      font-size: 42px; font-weight:700; color:white;
     }
-    .nav-prev { left:28px; }
-    .nav-next { right:28px; }
+    .nav-prev { left: calc(50% - 108px); }
+    .nav-next { left: calc(50% + 28px); }
     .nav-prev:hover, .nav-next:hover {
       background:rgba(0,160,227,0.4);
       border-color:var(--blue);
-      transform:translateY(-50%) scale(1.08);
+      transform:scale(1.08);
     }
     .nav-prev:active, .nav-next:active {
-      transform:translateY(-50%) scale(0.94);
+      transform:scale(0.94);
     }
 
     /* counter badge */
     .nav-counter {
-      position:absolute; bottom:24px; left:50%;
+      position:absolute; bottom:46px; left:50%;
       transform:translateX(-50%);
       z-index:5;
       background:rgba(0,0,0,0.5);
@@ -187,7 +187,7 @@
       border:1px solid rgba(255,255,255,0.12);
       border-radius:20px;
       padding:6px 18px;
-      font-size:13px; font-weight:500;
+      font-size: 18px; font-weight:500;
       color:rgba(255,255,255,0.6);
       letter-spacing:0.08em;
     }
@@ -196,35 +196,36 @@
       padding: 48px 56px;
       display:flex; flex-direction:column; gap:20px;
       overflow-y:auto; scrollbar-width:none;
+      max-height: calc(1080px - 110px);
     }
     .detail-info::-webkit-scrollbar { display:none; }
 
     .detail-tag {
-      font-size:11px; font-weight:700;
+      font-size: 16px; font-weight:700;
       letter-spacing:0.18em; text-transform:uppercase;
       color:var(--orange);
     }
     .detail-name-cs {
-      font-size:48px; font-weight:700; line-height:1.0;
+      font-size: 56px; font-weight:700; line-height:1.0;
       background:linear-gradient(135deg,#fff 0%,#a8d8f0 100%);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       background-clip:text;
     }
     .detail-name-la {
-      font-size:18px; font-weight:300; font-style:italic;
+      font-size: 23px; font-weight:300; font-style:italic;
       color:rgba(255,255,255,0.45); margin-top:-10px;
     }
     .detail-name-en {
-      font-size:15px; font-weight:500;
+      font-size: 21px; font-weight:500;
       color:rgba(255,255,255,0.35); margin-top:-8px;
     }
     .divider { height:1px; background:rgba(0,160,227,0.2); }
     .detail-desc {
-      font-size:16px; font-weight:300;
+      font-size: 21px; font-weight:300;
       line-height:1.8; color:rgba(255,255,255,0.7);
     }
     .map-label {
-      font-size:11px; font-weight:700;
+      font-size: 16px; font-weight:700;
       letter-spacing:0.15em; text-transform:uppercase;
       color:rgba(255,255,255,0.3);
     }
@@ -296,50 +297,61 @@
   // ── DATA ŽIVOČICHŮ ── editováno přes admin panel ──
   const ANIMALS = [
     {
-        "cs": "Bradáč broskvový",
-        "en": "Peach anthias",
-        "la": "Nemanthias dispar",
-        "tag_cs": "",
-        "tag_en": "",
-        "desc_cs": "Jeden z nejkrásnějších zástupců skupiny bradáčů. Samci jsou sytě oranžovorůžoví s výrazně prodlouženým prvním paprskem hřbetní ploutve a hluboko vykrojenou ocasní ploutví. Samice jsou skromnější – žlutooranžové s bílým břichem.\n\nTvoří velká hejna nad korály a útesovými svahy vystavenými proudění, kde loví zooplankton ve volné vodě. Sociální struktura je harémová – jeden dominantní samec spravuje skupinu samic. Pokud samec zahyne, dominantní samice změní pohlaví.\n\nObývají vnější útesové svahy v Indo-Pacifiku, nejčastěji v hloubkách od 10 do 50 metrů.",
-        "desc_en": "",
-        "img": "images/Nemanthias dispar.png",
-        "map": "images/zivoc_008.png"
+      cs: "Bradáč ohnivý",
+      en: "Flame anthias",
+      la: "Pseudanthias ignitus",
+      tag_cs: "Indopacifická oblast",
+      tag_en: "Indo-Pacific region",
+      desc_cs: "Bradáč ohnivý obývá vnější hranu korálových útesů v hloubce od 3 do 15 metrů. Vytváří veliká hejna v harémovém uspořádání — několik samic na jednoho samce. Je to sekvenční hermafrodit: z nejsilnější, dominantní samice se stane samec.",
+      desc_en: "The flame anthias inhabits the outer edge of coral reefs at depths of 3 to 15 metres. It forms large schools in harem arrangements — several females to one male. It is a sequential hermaphrodite: the strongest, dominant female becomes a male.",
+      img: "images/zivoc_002.png",
+      map: "images/zivoc_008.png"
     },
     {
-        "cs": "Pyskoun akvamarínový",
-        "en": "Aquamarine fairy wrasse",
-        "la": "Cirrhilabrus aquamarinus",
-        "tag_cs": "",
-        "tag_en": "",
-        "desc_cs": "Endemit filipínských útesů. Samci jsou zářivě modrozelení (jako minerál akvamarín) s narůžovělým nádechem na břišní části a výrazně zbarvenými ploutvemi. Samice jsou nenápadnější, s jemně pruhovanou kresbou.\n\nŽijí v harémových skupinách: jeden samec spravuje území s několika samicemi. Při námluvách samec rozpíná ploutve, sytěji se vybarví a předvádí okázalé výstavní plavání.\n\nObývají vnější svahy korálových útesů v hloubkách od 15 do 60 metrů, kde loví zooplankton ve volné vodě.",
-        "desc_en": "",
-        "img": "images/Cirrhilabrus aquamarinius.png",
-        "map": "images/zivoc_008.png"
+      cs: "Živočich 2",
+      en: "Animal 2",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 2.",
+      desc_en: "Description of animal 2.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
     },
     {
-        "cs": "Sapínovec nádherný",
-        "en": "Splendid dottyback",
-        "la": "Manonichthys splendens",
-        "tag_cs": "",
-        "tag_en": "",
-        "desc_cs": "Zářivá kombinace citrónově žlutého těla a modrofialové přední části – zbarvení tohoto drobného sapínovce patří k nejnápadnějším na útese. Pochází z Filipín a Indonésie, kde obývá skalní štěrbiny a převisy útesů.\n\nJe to samotářský a výrazně teritoriální druh. Živí se drobnými bezobratlými, které loví v blízkém okolí svého úkrytu. Přes svoji malou velikost se nebojí konfrontace s výrazně většími rybami, které proniknou do jeho revíru.\n\nSamice klade jikry do nory, samec je střeží a provzdušňuje až do vy",
-        "desc_en": "",
-        "img": "images/Manonichthys splendens.png",
-        "map": "images/zivoc_008.png"
+      cs: "Živočich 3",
+      en: "Animal 3",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 3.",
+      desc_en: "Description of animal 3.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
     },
     {
-        "cs": "Větevník millepora",
-        "en": "Millepora acro",
-        "la": "Acropora millepora",
-        "tag_cs": "",
-        "tag_en": "",
-        "desc_cs": "V rodu Acropora najdeme jedny z nejvýznamnějších a nejrychleji rostoucích útesotvorných korálů.\nAcropora millepora je rozeznatelná na první pohled, díky pravidelnému tvaru kolonie hustě poseté dlouhými polypy. Krátké vertikální větve zpomalují proudění vody a vytváří víry, které ženou plankton přímo k vnitřním polypům. Polypy na vrchních koncích větví potravu nepřijímají, ale specializují se na fotosyntézu.",
-        "desc_en": "",
-        "img": "images/acropora millepora.png",
-        "map": "images/zivoc_008.png"
+      cs: "Živočich 4",
+      en: "Animal 4",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 4.",
+      desc_en: "Description of animal 4.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
+    },
+    {
+      cs: "Živočich 5",
+      en: "Animal 5",
+      la: "Lorem ipsum",
+      tag_cs: "",
+      tag_en: "",
+      desc_cs: "Popis živočicha 5.",
+      desc_en: "Description of animal 5.",
+      img: "images/zivoc_003.png",
+      map: "images/zivoc_008.png"
     }
-];
+  ];
 
   let currentLang = 'cs';
   let currentIndex = 0;
@@ -419,20 +431,20 @@
   renderSidebar();
   renderDetail(0);
 </script>
-<script>
-(function() {
-  var TIMEOUT = 60 * 1000;
-  var HOME = "index.html";
-  var timer;
-  function reset() {
-    clearTimeout(timer);
-    timer = setTimeout(function() { window.location.href = HOME; }, TIMEOUT);
-  }
-  ["mousemove","mousedown","touchstart","touchmove","keydown","scroll","click"].forEach(function(e) {
-    document.addEventListener(e, reset, { passive: true });
-  });
-  reset();
-})();
+  <script>
+  (function() {
+    var TIMEOUT = 60 * 1000;
+    var HOME = "index.html";
+    var timer;
+    function reset() {
+      clearTimeout(timer);
+      timer = setTimeout(function() { window.location.href = HOME; }, TIMEOUT);
+    }
+    ["mousemove","mousedown","touchstart","touchmove","keydown","scroll","click"].forEach(function(e) {
+      document.addEventListener(e, reset, { passive: true });
+    });
+    reset();
+  })();
   </script>
 </body>
 </html>
