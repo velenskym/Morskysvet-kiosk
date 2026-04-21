@@ -669,10 +669,17 @@
         <div class="field-label">Popis (EN)</div>
         <textarea class="field-textarea" id="m-desc-en" rows="3" placeholder="Animal description…"></textarea>
       </div>
-      <div class="field-group">
-        <div class="field-label">Cesta k fotce (images/...)</div>
-        <input class="field-input" id="m-img" type="text" placeholder="images/zivoc_002.png">
-        <div style="font-size:12px;color:var(--text-dim);margin-top:5px">Soubor musí být nahraný ve složce images/ na GitHubu</div>
+      <div class="fields-row">
+        <div class="field-group">
+          <div class="field-label">Cesta k fotce (images/...)</div>
+          <input class="field-input" id="m-img" type="text" placeholder="images/zivoc_002.png">
+          <div style="font-size:12px;color:var(--text-dim);margin-top:5px">Soubor musí být nahraný ve složce images/ na GitHubu</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Cesta k mapě rozšíření (images/...)</div>
+          <input class="field-input" id="m-map" type="text" placeholder="images/zivoc_008.png">
+          <div style="font-size:12px;color:var(--text-dim);margin-top:5px">Mapa rozšíření živočicha</div>
+        </div>
       </div>
       <div class="field-group">
         <div class="field-label">Náhled</div>
@@ -916,6 +923,7 @@
     document.getElementById('m-desc-cs').value = a ? a.descCs : '';
     document.getElementById('m-desc-en').value = a ? a.descEn : '';
     document.getElementById('m-img').value = a ? a.img : 'images/zivoc_003.png';
+    document.getElementById('m-map').value = a ? (a.map||'images/zivoc_008.png') : 'images/zivoc_008.png';
     document.getElementById('animalPreview').style.display = 'none';
     modal.classList.add('open');
   }
@@ -933,6 +941,7 @@
       descCs: document.getElementById('m-desc-cs').value,
       descEn: document.getElementById('m-desc-en').value,
       img: document.getElementById('m-img').value,
+      map: document.getElementById('m-map').value,
     };
     if (editingAnimalId) {
       const idx = animals.findIndex(a => a.id === editingAnimalId);
