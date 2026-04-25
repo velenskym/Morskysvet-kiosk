@@ -103,13 +103,17 @@
       background:rgba(0,160,227,0.1);
       border-left-color:var(--blue);
     }
+    .animal-thumb img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  background: #00325a;
+}
     .animal-thumb {
       width:80px; height:60px;
       border-radius:10px; overflow:hidden;
       flex-shrink:0; background:var(--deeper);
     }
-    .animal-thumb img { width:100%; height:100%; object-fit:cover; }
-    .animal-names { flex:1; min-width:0; }
+    .animal-names { flex:1; min-width:0}; 
     .animal-cs {
       font-size: 22px; font-weight:600; color:white;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
